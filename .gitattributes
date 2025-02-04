@@ -1,1 +1,23 @@
 Library/PackageCache/com.unity.burst@1.8.16/.Runtime/libburst-llvm-16.dylib filter=lfs diff=lfs merge=lfs -text
+
+# Unity의 라이브러리 파일 및 바이너리 파일을 LFS로 처리
+*.psd filter=lfs diff=lfs merge=lfs
+*.jpg filter=lfs diff=lfs merge=lfs
+*.png filter=lfs diff=lfs merge=lfs
+*.mp4 filter=lfs diff=lfs merge=lfs
+*.wav filter=lfs diff=lfs merge=lfs
+*.mp3 filter=lfs diff=lfs merge=lfs
+*.ogg filter=lfs diff=lfs merge=lfs
+*.fbx filter=lfs diff=lfs merge=lfs
+*.unity filter=lfs diff=lfs merge=lfs
+*.prefab filter=lfs diff=lfs merge=lfs
+*.mat filter=lfs diff=lfs merge=lfs
+*.anim filter=lfs diff=lfs merge=lfs
+*.ttf filter=lfs diff=lfs merge=lfs
+*.otf filter=lfs diff=lfs merge=lfs
+
+# DLL 및 바이너리 라이브러리 (macOS용 .dylib 포함)
+*.dll filter=lfs diff=lfs merge=lfs -text
+*.dylib filter=lfs diff=lfs merge=lfs -text
+*.so filter=lfs diff=lfs merge=lfs -text
+*.a filter=lfs diff=lfs merge=lfs -text
