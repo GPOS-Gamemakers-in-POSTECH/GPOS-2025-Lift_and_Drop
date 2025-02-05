@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Goal
+  - LeftClaw
+  - RightClaw
   layers:
   - Default
   - TransparentFX
@@ -15,9 +18,9 @@ TagManager:
   - Claw_Crane
   - Claw_Heart
   - Claw_Claw
-  - 
-  - 
-  - 
+  - Doll
+  - cameraboundary
+  - Goal
   - 
   - 
   - 
