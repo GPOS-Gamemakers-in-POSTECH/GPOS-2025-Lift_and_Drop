@@ -15,7 +15,7 @@ public class Claw_Crane : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        inputVec.y = Input.GetAxis("Vertical");
+        inputVec.y = Input.GetAxisRaw("Vertical");
         if (rb.position.y <= minY && inputVec.y < 0)
         {
             inputVec.y = 0;  // ÇÏÇâ ÀÌµ¿À» ¸ØÃã

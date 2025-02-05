@@ -2,31 +2,37 @@ using UnityEngine;
 
 public class Right_Pivot : MonoBehaviour
 {
-    public float rotationSpeed = 1f; // 집게 올라가는 속도
-    private bool isMovingUp = false; // 집게가 올라가는 상태인지 확인하는 변수
-
+    public float inputX;
+    float rotationSpeed=50f;
+    float returnSpeed = 50f;
+    public float nextX;
+    float maxRotation = 60f;
+    float minRotation = 0f;
+    Rigidbody2D rb;
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
+        inputX = Input.GetAxisRaw("Claw_Up");
+    }
+    void FixedUpdate()
+    {
+        LiftClaw();
+    }
+    void LiftClaw()
+    {
+        float nextX;
+        if (inputX > 0) // 스페이스바를 누르면 올라감
         {
-            // 스페이스바를 누르면 집게가 올라감
-            isMovingUp = true;
+            nextX = Time.fixedDeltaTime * rotationSpeed;
         }
-        else
+        else // 스페이스바를 떼면 자동으로 내려감
         {
-            // 스페이스바를 떼면 집게가 내려감
-            isMovingUp = false;
+            nextX = -returnSpeed * Time.fixedDeltaTime; // 아래 방향으로 회전
         }
-
-        // 집게가 올라가는 상태라면
-        if (isMovingUp)
-        {
-            transform.Rotate(0, 0, +rotationSpeed * Time.deltaTime);
-        }
-        else
-        {
-            // 내려가는 상태라면
-            transform.Rotate(0, 0, -rotationSpeed * Time.deltaTime);
-        }
+        float newRotation = Mathf.Clamp(rb.rotation + nextX, minRotation, maxRotation);
+        rb.MoveRotation(newRotation);
     }
 }

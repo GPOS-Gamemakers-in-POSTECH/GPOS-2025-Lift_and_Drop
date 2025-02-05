@@ -15,7 +15,7 @@ public class Claw_Head : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        inputVec.x = Input.GetAxis("Horizontal");
+        inputVec.x = Input.GetAxisRaw("Horizontal");
     }
     void FixedUpdate()
     {
