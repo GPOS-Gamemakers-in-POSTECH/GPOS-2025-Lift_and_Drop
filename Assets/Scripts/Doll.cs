@@ -24,31 +24,33 @@ public class Doll : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.CompareTag("LeftClaw"))
+        if (collision.gameObject.CompareTag("LeftClaw"))
         {
             isTouchingLeft = true;
-            Debug.Log("¿Þ");
         }
-        else if (collision.CompareTag("RightClaw"))
+        else if (collision.gameObject.CompareTag("RightClaw"))
         {
             isTouchingRight = true;
-            Debug.Log("¿À¸¥");
         }
-        else if (collision.CompareTag("Goal"))
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Goal"))
         {
             StartCoroutine(WaitForThreeSeconds());
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.CompareTag("LeftClaw"))
+        if (collision.gameObject.CompareTag("LeftClaw"))
         {
             isTouchingLeft = false;
         }
-        else if (collision.CompareTag("RightClaw"))
+        else if (collision.gameObject.CompareTag("RightClaw"))
         {
             isTouchingRight = false;
         }

@@ -7,6 +7,7 @@ TagManager:
   - Goal
   - LeftClaw
   - RightClaw
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Doll
   - cameraboundary
   - Goal
-  - 
+  - Item
   - 
   - 
   - 
