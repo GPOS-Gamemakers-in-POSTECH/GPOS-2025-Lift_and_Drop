@@ -1,16 +1,10 @@
 fileFormatVersion: 2
-guid: c01fa071770de8747afc7fe36e2e7cfb
+guid: 8656a921feed68c43a7a24f4d2cb9782
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8876641551535793593
-    second: Group 33_0
-  - first:
-      213: 5999557789686298312
-    second: Group 33_1
-  - first:
-      213: 2730558292065528612
-    second: Group 33_2
+      213: -4152067284428250806
+    second: Mask group-7_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -106,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Group 33_0
+      name: Mask group-7_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 17
-        height: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -121,52 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 74a9c321a85dfc480800000000000000
-      internalID: -8876641551535793593
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Group 33_1
-      rect:
-        serializedVersion: 2
-        x: 19
-        y: 0
-        width: 258
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8c6fdafc506b24350800000000000000
-      internalID: 5999557789686298312
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Group 33_2
-      rect:
-        serializedVersion: 2
-        x: 279
-        y: 0
-        width: 17
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 42b201dac44e4e520800000000000000
-      internalID: 2730558292065528612
+      spriteID: a41222cadc4e066c0800000000000000
+      internalID: -4152067284428250806
       vertices: []
       indices: 
       edges: []
@@ -185,9 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Group 33_0: -8876641551535793593
-      Group 33_1: 5999557789686298312
-      Group 33_2: 2730558292065528612
+      Mask group-7_0: -4152067284428250806
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
