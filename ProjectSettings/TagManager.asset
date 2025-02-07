@@ -26,6 +26,7 @@ TagManager:
   - Goal
   - Item
   - Stealth
+  - Stealth_Head
   - 
   - 
   - 
@@ -41,8 +42,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - Backgroud
   m_SortingLayers:
   - name: Default
     uniqueID: 0
