@@ -3,16 +3,18 @@ using SingletonGameManager;
 using System.Collections;
 public class Doll : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    /*
     private bool isTouchingLeft = false;
     private bool isTouchingRight = false;
 
-    void Awake()
+    private Rigidbody2D rb;
+
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>(); // Rigidbody2D 가져오기
     }
 
-    void Update()
+    private void Update()
     {
         if (isTouchingLeft && isTouchingRight)
         {
@@ -36,13 +38,6 @@ public class Doll : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Goal"))
-        {
-            StartCoroutine(WaitForThreeSeconds());
-        }
-    }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
@@ -53,6 +48,15 @@ public class Doll : MonoBehaviour
         else if (collision.gameObject.CompareTag("RightClaw"))
         {
             isTouchingRight = false;
+        }
+    }
+    */
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Goal"))
+        {
+            StartCoroutine(WaitForThreeSeconds());
         }
     }
     IEnumerator WaitForThreeSeconds()

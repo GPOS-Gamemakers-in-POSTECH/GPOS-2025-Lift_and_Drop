@@ -1,31 +1,39 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Claw_Crane : MonoBehaviour
 {
-    public Vector2 inputVec;
-    Rigidbody2D rb;
-    public float speed;
     public float maxLength = 5f;
-    float firstPostionY;
-    void Awake()
+
+    [SerializeField] private float speed = 3f;
+
+    private float firstPostionY;
+    private float inputY;
+
+    private Rigidbody2D _rigidbdoy;
+    private SliderJoint2D _joint;
+
+    private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        firstPostionY = rb.position.y;
+        _rigidbdoy = GetComponent<Rigidbody2D>();
+        _joint = GetComponent<SliderJoint2D>();
+
+        firstPostionY = _rigidbdoy.position.y;
+        inputY = 0;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        inputVec.y = Input.GetAxisRaw("Vertical");
-        if (firstPostionY - rb.position.y >= maxLength && inputVec.y < 0)
+        inputY = Input.GetAxisRaw("Vertical");
+        if (firstPostionY - _rigidbdoy.position.y >= maxLength && inputY < 0)
         {
-            inputVec.y = 0;  // ÇÏÇâ ÀÌµ¿À» ¸ØÃã
+            inputY = 0;  // ÇÏÇâ ÀÌµ¿À» ¸ØÃã
         }
     }
-    void FixedUpdate()
+
+    private void FixedUpdate()
     {
-        Vector2 nextVec = inputVec.normalized * speed * Time.fixedDeltaTime;
-        rb.MovePosition(rb.position + nextVec);
+        JointMotor2D motor = _joint.motor;
+        motor.motorSpeed = speed * inputY;
+        _joint.motor = motor;
     }
 }
