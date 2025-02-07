@@ -7,16 +7,15 @@ public class ClawPartTrigger : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Item")) // 태그가 "Item"이면
+        if (other.CompareTag("ItemStealth")) // 태그가 "Item"이면
         {
-            Debug.Log("닿음");
-            getStealthItem();
+            StartCoroutine(controller.GetStealthItem());
+            Destroy(other.gameObject);
         }
-    }
-
-    void getStealthItem()
-    {
-        controller.SetTransparency(0.5f);
-        AudioManager.Instance.playOnlyStealth();
+        else if (other.CompareTag("ItemDepth")) // 태그가 "Item"이면
+        {
+            controller.PlusMaxDepth();
+            Destroy(other.gameObject);
+        }
     }
 }
