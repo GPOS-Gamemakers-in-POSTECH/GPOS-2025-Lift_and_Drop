@@ -6,7 +6,7 @@ public class Claw_Crane : MonoBehaviour
     public Vector2 inputVec;
     Rigidbody2D rb;
     public float speed;
-    public float maxLength = 10f;
+    public float maxLength = 5f;
     float firstPostionY;
     void Awake()
     {
