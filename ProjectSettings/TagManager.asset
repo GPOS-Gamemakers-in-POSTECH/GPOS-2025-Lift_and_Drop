@@ -7,7 +7,9 @@ TagManager:
   - Goal
   - LeftClaw
   - RightClaw
-  - Item
+  - Claw_Crane
+  - ItemStealth
+  - ItemDepth
   layers:
   - Default
   - TransparentFX
@@ -23,7 +25,7 @@ TagManager:
   - cameraboundary
   - Goal
   - Item
-  - 
+  - Stealth
   - 
   - 
   - 
