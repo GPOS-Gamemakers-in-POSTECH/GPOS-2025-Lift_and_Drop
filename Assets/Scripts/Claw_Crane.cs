@@ -6,17 +6,19 @@ public class Claw_Crane : MonoBehaviour
     public Vector2 inputVec;
     Rigidbody2D rb;
     public float speed;
-    public float minY = 0f;
+    public float maxLength = 5f;
+    float firstPostionY;
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        firstPostionY = rb.position.y;
     }
 
     // Update is called once per frame
     void Update()
     {
         inputVec.y = Input.GetAxisRaw("Vertical");
-        if (rb.position.y <= minY && inputVec.y < 0)
+        if (firstPostionY - rb.position.y >= maxLength && inputVec.y < 0)
         {
             inputVec.y = 0;  // ÇÏÇâ ÀÌµ¿À» ¸ØÃã
         }
