@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Head_Smile
+      name: Group 3_0
       rect:
         serializedVersion: 2
         x: 0
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Head_Smile: 4031564604880626460
+      Group 3_0: 4031564604880626460
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
