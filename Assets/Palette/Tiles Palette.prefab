@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2121834198849047297}
   - component: {fileID: 8159077601008720673}
   m_Layer: 0
-  m_Name: LIFT&DROPTILES
+  m_Name: Tiles Palette
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
