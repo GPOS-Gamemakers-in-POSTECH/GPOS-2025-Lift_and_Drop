@@ -5,21 +5,24 @@ using UnityEngine;
 public class Claw_Head : MonoBehaviour
 {
     public Vector2 inputVec;
-    Rigidbody2D rb;
     public float speed;
-    void Awake()
+
+    private Rigidbody2D _rigidbody;
+
+    private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        _rigidbody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         inputVec.x = Input.GetAxisRaw("Horizontal");
     }
-    void FixedUpdate()
+
+    private void FixedUpdate()
     {
-        Vector2 nextVec = inputVec.normalized * Time.fixedDeltaTime*speed;
-        rb.MovePosition(rb.position+nextVec);
+        Vector2 nextVec = speed * Time.fixedDeltaTime * inputVec.normalized;
+        _rigidbody.MovePosition(_rigidbody.position + nextVec);
     }
 }

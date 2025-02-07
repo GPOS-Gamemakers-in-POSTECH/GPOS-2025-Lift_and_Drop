@@ -1,4 +1,3 @@
-using SingletonAudioManager;
 using UnityEngine;
 
 public class ClawPartTrigger : MonoBehaviour
