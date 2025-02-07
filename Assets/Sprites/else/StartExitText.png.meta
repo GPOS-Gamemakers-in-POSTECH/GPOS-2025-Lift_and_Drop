@@ -159,7 +159,9 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      StartExitText_0: -9189698356345750726
+      StartExitText_1: -3489229543883599488
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
