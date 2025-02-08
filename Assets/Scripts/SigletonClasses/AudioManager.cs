@@ -48,27 +48,39 @@ namespace SingletonAudioManager
         
         public void Init()
         {
-            GameObject bgmObject = new GameObject("BgmPlayer");
-            bgmSource = bgmObject.AddComponent<AudioSource>();
-            bgmSource.volume = bgmVolume;
-            bgmSource.clip = bgmClip;
-            bgmSource.loop = true;
-            bgmSource.playOnAwake = false;
+            if(bgmSource == null)
+            {
+                GameObject bgmObject = new GameObject("BgmPlayer");
+                bgmSource = bgmObject.AddComponent<AudioSource>();
+                bgmSource.volume = bgmVolume;
+                bgmSource.clip = bgmClip;
+                bgmSource.loop = true;
+                bgmSource.playOnAwake = false;
+            }
+            DontDestroyOnLoad (bgmSource);
 
-            GameObject bgmObject2 = new GameObject("BgmPlayer2");
-            bgmSource2 = bgmObject2.AddComponent<AudioSource>();
-            bgmSource2.volume = bgmVolume2;
-            bgmSource2.clip = bgmClip2;
-            bgmSource2.loop = true;
-            bgmSource2.playOnAwake = false;
+            if (bgmSource2 == null)
+            {
+                GameObject bgmObject2 = new GameObject("BgmPlayer2");
+                bgmSource2 = bgmObject2.AddComponent<AudioSource>();
+                bgmSource2.volume = bgmVolume2;
+                bgmSource2.clip = bgmClip2;
+                bgmSource2.loop = true;
+                bgmSource2.playOnAwake = false;
+            }
+            DontDestroyOnLoad(bgmSource2);
 
-            GameObject bgmObject3 = new GameObject("BgmPlayer3");
-            bgmSource3 = bgmObject3.AddComponent<AudioSource>();
-            bgmSource3.volume = bgmVolume3;
-            bgmSource3.clip = bgmClip3;
-            bgmSource3.loop = true;
-            bgmSource3.playOnAwake = false;
-        }
+            if (bgmSource3 == null)
+            {
+                GameObject bgmObject3 = new GameObject("BgmPlayer3");
+                bgmSource3 = bgmObject3.AddComponent<AudioSource>();
+                bgmSource3.volume = bgmVolume3;
+                bgmSource3.clip = bgmClip3;
+                bgmSource3.loop = true;
+                bgmSource3.playOnAwake = false;
+            }
+            DontDestroyOnLoad(bgmSource3);
+    }
         public void playBgm()
         {
             bgmSource.Play();

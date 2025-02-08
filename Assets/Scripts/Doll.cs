@@ -41,6 +41,7 @@ public class Doll : MonoBehaviour
         if (collision.gameObject.CompareTag("Goal"))
         {
             StartCoroutine(WaitForThreeSeconds());
+            GameManager.Instance.SendMessage("OnDollReachedGoal");
         }
     }
 

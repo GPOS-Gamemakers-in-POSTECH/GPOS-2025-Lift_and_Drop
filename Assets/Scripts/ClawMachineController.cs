@@ -7,7 +7,16 @@ using UnityEngine;
 
 public class ClawMachineController : MonoBehaviour
 {
-    public GameObject[] clawParts; // Claw_Head, Claw_Crane 등 모든 부품을 여기에 할당
+    [SerializeField] private GameObject[] clawParts; // Claw_Head, Claw_Crane 등 모든 부품을 여기에 할당
+    [SerializeField] private SpriteRenderer _headSpriteRenderer;
+
+    [SerializeField] private float blinkAlpha = 0.2f;
+    [SerializeField] private float defaultStealthAlpha = 0.5f;
+    [SerializeField] private float normalAlpha = 1f;
+
+    [SerializeField] private int stealthLayer = 14;
+
+    private readonly Dictionary<GameObject, int> originalLayers = new();
 
     void Start()
     {
@@ -19,22 +28,20 @@ public class ClawMachineController : MonoBehaviour
         {
             ClawPartTrigger trigger = part.AddComponent<ClawPartTrigger>(); // 동적으로 Trigger 스크립트 추가
             trigger.controller = this; // ClawMachineController 연결
+            originalLayers[part] = part.layer;
+            if (part.name == "Claw_Head")
+            {
+                _headSpriteRenderer = part.GetComponent<SpriteRenderer>();
+            }
         }
     }
 
     public IEnumerator GetStealthItem()   //stealth 아이템 획득   1. 브금 변경, 2. 캐릭터 layer변경으로 충돌 판정 변화, 3. 캐릭터 표정 변화, 4. fade_Effect
     {
-        float blinkAlpha = 0.2f;
-        float defaultStealthAlpha = 0.5f;
-        float normalAlpha = 1f;
-        int stealthLayer = 14;
-        Dictionary<GameObject, int> originalLayers = new Dictionary<GameObject, int>();
-
         foreach(GameObject part in clawParts)
         {
             if(part != null)
             {
-                originalLayers[part] = part.layer; // 원래 레이어 저장
                 part.layer = stealthLayer; // 투명화 레이어로 변경
                 if (part.name == "Claw_Head")
                 {
@@ -44,7 +51,7 @@ public class ClawMachineController : MonoBehaviour
         }
 
 
-        SetHeadSprite(2);
+        SetHeadSprite(HeadSprite.Smile);
         SetTransparency(defaultStealthAlpha);
         AudioManager.Instance.playOnlyStealth();
         
@@ -75,7 +82,7 @@ public class ClawMachineController : MonoBehaviour
             }
         }
 
-        SetHeadSprite(1);
+        SetHeadSprite(HeadSprite.Normal);
         SetTransparency(normalAlpha);
         AudioManager.Instance.playOnlyNormal();
 
@@ -103,23 +110,15 @@ public class ClawMachineController : MonoBehaviour
         }
     }
 
-    private void SetHeadSprite(int a) // 1= normal, 2 = smile, 3= happy 
+    private void SetHeadSprite(HeadSprite headSprite) // 1= normal, 2 = smile, 3= happy 
     {
-        GameObject claw_Head = GameObject.Find("Claw_Head");
-        SpriteRenderer sr = claw_Head.GetComponent<SpriteRenderer>();
-        if (a == 1)
+        _headSpriteRenderer.sprite = headSprite switch
         {
-            sr.sprite = Resources.Load<Sprite>("Sprites/Claw/Head_Normal");
-        }
-        else if (a == 2)
-        {
-            sr.sprite = Resources.Load<Sprite>("Sprites/Claw/Head_Smile");
-        }
-        else if (a == 3)
-        {
-            sr.sprite = Resources.Load<Sprite>("Sprites/Claw/Head_Happy");
-        }
-
+            HeadSprite.Normal => Resources.Load<Sprite>("Sprites/Claw/Group 3"),
+            HeadSprite.Smile => Resources.Load<Sprite>("Sprites/Claw/Group 13"),
+            HeadSprite.Happy => Resources.Load<Sprite>("Sprites/Claw/Group 12"),
+            _ => throw new System.NotImplementedException()
+        };
     }
 
 
