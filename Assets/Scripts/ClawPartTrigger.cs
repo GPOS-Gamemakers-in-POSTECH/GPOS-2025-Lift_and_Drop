@@ -1,3 +1,7 @@
+using SingletonAudioManager;
+using SingletonGameManager;
+using System.Collections;
+
 using UnityEngine;
 
 public class ClawPartTrigger : MonoBehaviour
@@ -15,6 +19,13 @@ public class ClawPartTrigger : MonoBehaviour
         {
             controller.PlusMaxDepth();
             Destroy(other.gameObject);
+            StartCoroutine(Exid());
         }
+    }
+    public IEnumerator Exid()
+    {
+        SceneNumber sceneNumber = SceneNumber.Stage_01;
+        yield return new WaitForSeconds(3);
+        GameManager.Instance.LoadScene(sceneNumber);
     }
 }
