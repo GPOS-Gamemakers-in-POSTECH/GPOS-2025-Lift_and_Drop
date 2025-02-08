@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputVec: {x: 0, y: 0}
-  speed: 3
+  speed: 6
 --- !u!234 &4712011977771424762
 SliderJoint2D:
   m_ObjectHideFlags: 0
@@ -345,6 +345,11 @@ MonoBehaviour:
   - {fileID: 5146086573510330009}
   - {fileID: 6204889982274288175}
   - {fileID: 6289367409180567661}
+  _headSpriteRenderer: {fileID: 0}
+  blinkAlpha: 0.2
+  defaultStealthAlpha: 0.5
+  normalAlpha: 1
+  stealthLayer: 14
 --- !u!1 &4966310689264311930
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,7 +473,7 @@ MonoBehaviour:
   inputX: 0
   nextX: 0
   IsClockwise: 1
-  rotationSpeedCW: 50
+  rotationSpeedCW: 60
   returnSpeedCW: 50
   maxRotation: 60
   minRotation: 0
@@ -751,7 +756,7 @@ MonoBehaviour:
   inputX: 0
   nextX: 0
   IsClockwise: 0
-  rotationSpeedCW: 50
+  rotationSpeedCW: 60
   returnSpeedCW: 50
   maxRotation: 60
   minRotation: 0
@@ -1255,7 +1260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLength: 5
-  speed: 3
+  speed: 6
   inputVec: {x: 0, y: 0}
 --- !u!255 &2897901486963800623
 FixedJoint2D:

@@ -124,7 +124,7 @@ public class ClawMachineController : MonoBehaviour
 
     public void PlusMaxDepth()
     {
-        foreach(GameObject part in clawParts)
+        foreach (GameObject part in clawParts)
         {
             if(part.CompareTag("Claw_Crane"))
             {

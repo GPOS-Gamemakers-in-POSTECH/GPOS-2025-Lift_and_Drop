@@ -569,6 +569,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: ClawMachineController
       objectReference: {fileID: 0}
+    - target: {fileID: 5088201159161199369, guid: 9af890ccd6b81c043be94c0d5e51748b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5088201159161199369, guid: 9af890ccd6b81c043be94c0d5e51748b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.33
+      objectReference: {fileID: 0}
     - target: {fileID: 5236302016798917619, guid: 9af890ccd6b81c043be94c0d5e51748b, type: 3}
       propertyPath: m_ConnectedAnchor.x
       value: 0.42999983
