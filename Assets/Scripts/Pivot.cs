@@ -5,33 +5,44 @@ public class Pivot : MonoBehaviour
     public float inputX;
     public float nextX;
 
-    [SerializeField] private float rotationSpeedCW = 0;
-    [SerializeField] private float returnSpeedCW = 0;
+    [SerializeField] private bool IsClockwise = false;
 
-    [SerializeField] private float maxRotation = 0f;
+    [SerializeField] private float rotationSpeedCW = 50f;
+    [SerializeField] private float returnSpeedCW = 50f;
+
+    [SerializeField] private float maxRotation = 60f;
     [SerializeField] private float minRotation = 0;
 
-    private Rigidbody2D _rigidbody;
+    Rigidbody2D _rigidbody;
 
-    private void Awake()
+    void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
     }
-
     private void Update()
     {
         inputX = Input.GetAxisRaw("Claw_Up");
     }
-
-    private void FixedUpdate()
+    void FixedUpdate()
     {
-        if (inputX > 0)
-            nextX = rotationSpeedCW * Time.fixedDeltaTime;
-        else
-            nextX = returnSpeedCW * Time.fixedDeltaTime;
+        LiftClaw();
+    }
+    void LiftClaw()
+    {
+        if (inputX > 0) // 스페이스바를 누르면 올라감
+        {
+            nextX = rotationSpeedCW * Time.fixedDeltaTime * (IsClockwise ? -1 : 1);
+        }
+        else // 스페이스바를 떼면 자동으로 내려감
+        {
+            nextX = -returnSpeedCW * Time.fixedDeltaTime * (IsClockwise ? -1 : 1); // 아래 방향으로 회전
+        }
 
         float newRotation = Mathf.Clamp(_rigidbody.rotation + nextX, minRotation, maxRotation);
-
+        if (IsClockwise)
+        {
+            newRotation = Mathf.Clamp(_rigidbody.rotation + nextX, -maxRotation, minRotation);
+        }
         _rigidbody.MoveRotation(newRotation);
     }
 }

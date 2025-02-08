@@ -3,26 +3,24 @@ using SingletonGameManager;
 using System.Collections;
 public class Doll : MonoBehaviour
 {
-    /*
+    private Rigidbody2D _rigidbody;
     private bool isTouchingLeft = false;
     private bool isTouchingRight = false;
 
-    private Rigidbody2D rb;
-
-    private void Awake()
+    void Awake()
     {
-        rb = GetComponent<Rigidbody2D>(); // Rigidbody2D 가져오기
+        _rigidbody = GetComponent<Rigidbody2D>(); // Rigidbody2D 가져오기
     }
 
-    private void Update()
+    void Update()
     {
         if (isTouchingLeft && isTouchingRight)
         {
-            rb.gravityScale = 0; // 중력 제거 (공중에 뜸)
+            _rigidbody.gravityScale = 0; // 중력 제거 (공중에 뜸)
         }
         else
         {
-            rb.gravityScale = 1; // 정상 중력
+            _rigidbody.gravityScale = 1; // 정상 중력
         }
     }
 
@@ -38,6 +36,13 @@ public class Doll : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Goal"))
+        {
+            StartCoroutine(WaitForThreeSeconds());
+        }
+    }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
@@ -48,15 +53,6 @@ public class Doll : MonoBehaviour
         else if (collision.gameObject.CompareTag("RightClaw"))
         {
             isTouchingRight = false;
-        }
-    }
-    */
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Goal"))
-        {
-            StartCoroutine(WaitForThreeSeconds());
         }
     }
     IEnumerator WaitForThreeSeconds()
