@@ -1259,7 +1259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9da812d380ea79c449a808336c4726ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLength: 5
+  maxLength: 10
   speed: 6
   inputVec: {x: 0, y: 0}
 --- !u!255 &2897901486963800623

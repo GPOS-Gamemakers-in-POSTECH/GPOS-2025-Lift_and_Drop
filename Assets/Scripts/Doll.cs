@@ -40,8 +40,8 @@ public class Doll : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Goal"))
         {
-            StartCoroutine(WaitForThreeSeconds());
-            GameManager.Instance.SendMessage("OnDollReachedGoal");
+            StartCoroutine(WaitForOneSeconds());
+            GameManager.Instance.OnDollReachedGoal();
             Destroy(this.gameObject);
         }   
     }
@@ -57,12 +57,11 @@ public class Doll : MonoBehaviour
             isTouchingRight = false;
         }
     }
-    IEnumerator WaitForThreeSeconds()
+    IEnumerator WaitForOneSeconds()
     {
         // 10초 대기
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1);
         // 10초가 지나면 실행되는 코드
         Debug.Log("들어갔어요");
-        GameManager.Instance.Clear();
     }
 }

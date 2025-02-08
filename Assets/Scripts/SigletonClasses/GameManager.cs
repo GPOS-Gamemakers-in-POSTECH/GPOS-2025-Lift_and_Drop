@@ -58,8 +58,13 @@ namespace SingletonGameManager
                 SceneManager.LoadScene(sceneName);
             } 
         }
-        public void onDollReachedGoal()
+        public void RestartScene(SceneNumber currentSceneNumber)
         {
+            SceneManager.LoadScene(sceneName);
+        }
+        public void OnDollReachedGoal()
+        {
+            Debug.Log("메세지 받음");
             Clear();
         }
     }
