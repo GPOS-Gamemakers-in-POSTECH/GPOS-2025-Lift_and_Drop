@@ -3,24 +3,24 @@ using SingletonGameManager;
 using System.Collections;
 public class Doll : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    private Rigidbody2D _rigidbody;
     private bool isTouchingLeft = false;
     private bool isTouchingRight = false;
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody2D>(); // Rigidbody2D 가져오기
+        _rigidbody = GetComponent<Rigidbody2D>(); // Rigidbody2D 가져오기
     }
 
     void Update()
     {
         if (isTouchingLeft && isTouchingRight)
         {
-            rb.gravityScale = 0; // 중력 제거 (공중에 뜸)
+            _rigidbody.gravityScale = 0; // 중력 제거 (공중에 뜸)
         }
         else
         {
-            rb.gravityScale = 1; // 정상 중력
+            _rigidbody.gravityScale = 1; // 정상 중력
         }
     }
 

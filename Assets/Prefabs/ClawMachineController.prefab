@@ -356,8 +356,8 @@ GameObject:
   - component: {fileID: 5293537429529650274}
   - component: {fileID: 8584821152965626122}
   - component: {fileID: 5236302016798917619}
-  - component: {fileID: 284798723152382275}
   - component: {fileID: 1542220745333109084}
+  - component: {fileID: 7001837130523985290}
   m_Layer: 0
   m_Name: Left_Pivot
   m_TagString: Untagged
@@ -427,20 +427,6 @@ FixedJoint2D:
   m_ConnectedAnchor: {x: 0.42999998, y: 1.1800003}
   m_DampingRatio: 0
   m_Frequency: 0
---- !u!114 &284798723152382275
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4966310689264311930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6f7a885b64a5e3408d04e7f67e91232, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputX: 0
-  nextX: 0
 --- !u!233 &1542220745333109084
 HingeJoint2D:
   m_ObjectHideFlags: 0
@@ -467,6 +453,25 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 359
+--- !u!114 &7001837130523985290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4966310689264311930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e503f559fc21f38499d57fa0f783d125, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputX: 0
+  nextX: 0
+  IsClockwise: 1
+  rotationSpeedCW: 50
+  returnSpeedCW: 50
+  maxRotation: 60
+  minRotation: 0
 --- !u!1 &5146086573510330009
 GameObject:
   m_ObjectHideFlags: 0
@@ -634,8 +639,8 @@ GameObject:
   - component: {fileID: 7747450776701505137}
   - component: {fileID: 38498220948904062}
   - component: {fileID: 6387093920865215735}
-  - component: {fileID: 7699883435561232701}
   - component: {fileID: 1751061999421212606}
+  - component: {fileID: 8012497051481144764}
   m_Layer: 0
   m_Name: Right_Pivot
   m_TagString: Untagged
@@ -705,20 +710,6 @@ FixedJoint2D:
   m_ConnectedAnchor: {x: -0.39999998, y: 1.2000027}
   m_DampingRatio: 0
   m_Frequency: 0
---- !u!114 &7699883435561232701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5177003521466251683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c915ff708a2769e4497dced29b7f0ccf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputX: 0
-  nextX: 0
 --- !u!233 &1751061999421212606
 HingeJoint2D:
   m_ObjectHideFlags: 0
@@ -745,6 +736,25 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 359
+--- !u!114 &8012497051481144764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5177003521466251683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e503f559fc21f38499d57fa0f783d125, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputX: 0
+  nextX: 0
+  IsClockwise: 0
+  rotationSpeedCW: 50
+  returnSpeedCW: 50
+  maxRotation: 60
+  minRotation: 0
 --- !u!1 &6204889982274288175
 GameObject:
   m_ObjectHideFlags: 0
@@ -1244,9 +1254,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9da812d380ea79c449a808336c4726ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputVec: {x: 0, y: 0}
-  speed: 3
   maxLength: 5
+  speed: 3
+  inputVec: {x: 0, y: 0}
 --- !u!255 &2897901486963800623
 FixedJoint2D:
   m_ObjectHideFlags: 0

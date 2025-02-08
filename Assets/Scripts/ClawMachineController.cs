@@ -3,7 +3,7 @@ using SingletonAudioManager;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
-using UnityEngine;
+using UnityEngine;  
 
 public class ClawMachineController : MonoBehaviour
 {
@@ -56,20 +56,20 @@ public class ClawMachineController : MonoBehaviour
             if(elapsed>=2.1f)
             {
                 SetTransparency(blinkAlpha);
-                yield return new WaitForSeconds(0.075f); // 0.2초 동안 낮은 투명도 유지
+                yield return new WaitForSeconds(0.075f); 
 
                 SetTransparency(defaultStealthAlpha);
-                yield return new WaitForSeconds(0.075f); // 0.2초 동안 원래 투명도 유지
+                yield return new WaitForSeconds(0.075f); 
 
                 elapsed += 0.15f; // 깜빡이는 시간 추가SetTransparency
             }
             else
             {
                 SetTransparency(blinkAlpha);
-                yield return new WaitForSeconds(0.15f); // 0.2초 동안 낮은 투명도 유지
+                yield return new WaitForSeconds(0.15f); 
 
                 SetTransparency(defaultStealthAlpha);
-                yield return new WaitForSeconds(0.15f); // 0.2초 동안 원래 투명도 유지
+                yield return new WaitForSeconds(0.15f); 
 
                 elapsed += 0.3f; // 깜빡이는 시간 추가SetTransparency
             }

@@ -5,11 +5,11 @@ using UnityEngine;
 public class Claw_Head : MonoBehaviour
 {
     public Vector2 inputVec;
-    Rigidbody2D rb;
+    Rigidbody2D _rigidbody;
     public float speed;
     void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        _rigidbody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -20,6 +20,6 @@ public class Claw_Head : MonoBehaviour
     void FixedUpdate()
     {
         Vector2 nextVec = inputVec.normalized * Time.fixedDeltaTime*speed;
-        rb.MovePosition(rb.position+nextVec);
+        _rigidbody.MovePosition(_rigidbody.position+nextVec);
     }
 }

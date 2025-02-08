@@ -3,22 +3,28 @@ using UnityEngine.UIElements;
 
 public class Claw_Crane : MonoBehaviour
 {
-    public Vector2 inputVec;
-    Rigidbody2D rb;
-    public float speed;
     public float maxLength = 5f;
-    float firstPostionY;
+    [SerializeField] private float speed = 3f;
+
+    private float firstPositionY;
+
+    public Vector2 inputVec;
+
+    private Rigidbody2D _rigidbdoy;
+
+
     void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        firstPostionY = rb.position.y;
+        _rigidbdoy = GetComponent<Rigidbody2D>();
+
+        firstPositionY = _rigidbdoy.position.y;
     }
 
     // Update is called once per frame
     void Update()
     {
         inputVec.y = Input.GetAxisRaw("Vertical");
-        if (firstPostionY - rb.position.y >= maxLength && inputVec.y < 0)
+        if (firstPositionY - _rigidbdoy.position.y >= maxLength && inputVec.y < 0)
         {
             inputVec.y = 0;  // ÇÏÇâ ÀÌµ¿À» ¸ØÃã
         }
@@ -26,6 +32,6 @@ public class Claw_Crane : MonoBehaviour
     void FixedUpdate()
     {
         Vector2 nextVec = inputVec.normalized * speed * Time.fixedDeltaTime;
-        rb.MovePosition(rb.position + nextVec);
+        _rigidbdoy.MovePosition(_rigidbdoy.position + nextVec);
     }
 }

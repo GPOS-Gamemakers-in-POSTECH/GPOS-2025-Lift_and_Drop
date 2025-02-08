@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 namespace SingletonGameManager
 {   
     public class GameManager : MonoBehaviour
