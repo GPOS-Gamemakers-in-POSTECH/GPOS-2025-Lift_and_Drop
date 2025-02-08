@@ -7,7 +7,7 @@ public class Pivot : MonoBehaviour
 
     [SerializeField] private bool IsClockwise = false;
 
-    [SerializeField] private float rotationSpeedCW = 50f;
+    [SerializeField] private float rotationSpeedCW = 60f;
     [SerializeField] private float returnSpeedCW = 50f;
 
     [SerializeField] private float maxRotation = 60f;

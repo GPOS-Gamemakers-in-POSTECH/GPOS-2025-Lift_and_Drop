@@ -42,7 +42,8 @@ public class Doll : MonoBehaviour
         {
             StartCoroutine(WaitForThreeSeconds());
             GameManager.Instance.SendMessage("OnDollReachedGoal");
-        }
+            Destroy(this.gameObject);
+        }   
     }
 
     private void OnCollisionExit2D(Collision2D collision)

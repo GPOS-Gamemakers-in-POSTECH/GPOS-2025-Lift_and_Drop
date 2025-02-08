@@ -34,7 +34,7 @@ namespace SingletonGameManager
         }
         public void Clear()
         {
-            Debug.Log("Clear");
+            LoadNextStageScene(currentSceneName);
         }
 
         public void LoadScene(SceneNumber sceneNumber)
@@ -57,6 +57,10 @@ namespace SingletonGameManager
             {
                 SceneManager.LoadScene(sceneName);
             } 
+        }
+        public void onDollReachedGoal()
+        {
+            Clear();
         }
     }
 }
