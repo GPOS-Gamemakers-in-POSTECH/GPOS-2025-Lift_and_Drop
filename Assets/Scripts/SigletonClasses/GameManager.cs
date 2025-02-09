@@ -13,7 +13,7 @@ namespace SingletonGameManager
 
         public static SceneNumber sceneNumber;
         private string sceneName;
-        private static SceneNumber currentSceneName = SceneNumber.Start_scene;
+        public static SceneNumber currentSceneName = SceneNumber.Start_scene;
         private int numberOFScenes = Enum.GetValues(typeof(SceneNumber)).Length;
         bool timeStop = false;
 
@@ -95,6 +95,10 @@ namespace SingletonGameManager
         public void RestartScene(SceneNumber currentSceneNumber)
         {
             SceneManager.LoadScene(sceneName);
+            if(!AudioManager.bgmSource.isPlaying)
+            {
+                AudioManager.Instance.playBgm();
+            }
         }
         public void OnDollReachedGoal()
         {
@@ -103,7 +107,6 @@ namespace SingletonGameManager
         public void OnSwitchReached()
         {
             GameObject tilemapObj = GameObject.FindWithTag("SwitchTile");
-            Debug.Log("¿©±îÁø ¿È");
             if (tilemapObj != null) 
             {
                 Tilemap tilemap = tilemapObj.GetComponent<Tilemap>();

@@ -1,5 +1,6 @@
 using JetBrains.Annotations;
 using SingletonAudioManager;
+using SingletonGameManager;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
@@ -15,9 +16,10 @@ public class ClawMachineController : MonoBehaviour
     [SerializeField] private float normalAlpha = 1f;
 
     [SerializeField] private int stealthLayer = 14;
-
+    [SerializeField] private int invincibleLayer = 20;
     private readonly Dictionary<GameObject, int> originalLayers = new();
     private Coroutine stealthCoroutine;
+    private Coroutine invincibleCoroutine;
     void Start()
     {
         if (clawParts.Length == 0)
@@ -105,6 +107,75 @@ public class ClawMachineController : MonoBehaviour
         stealthCoroutine = StartCoroutine(StealthRoutine());
         yield break;
     }
+    public IEnumerator InvincibleRoutine()
+    {
+        foreach (GameObject part in clawParts)
+        {
+            if (part != null)
+            {
+                part.layer = invincibleLayer; // 투명화 레이어로 변경
+                if (part.name == "Claw_Head")
+                {
+                    part.layer = 21;
+                }
+            }
+        }
+
+
+        SetHeadSprite(HeadSprite.Happy);
+        AudioManager.Instance.playOnlyInvincible();
+
+        yield return new WaitForSeconds(7f);
+
+        float elapsed = 0f;
+        while (elapsed < 3f)
+        {
+            if (elapsed >= 2.1f)
+            {
+                SetTransparency(blinkAlpha);
+                yield return new WaitForSeconds(0.075f);
+
+                SetTransparency(normalAlpha);
+                yield return new WaitForSeconds(0.075f);
+
+                elapsed += 0.15f; // 깜빡이는 시간 추가SetTransparency
+            }
+            else
+            {
+                SetTransparency(blinkAlpha);
+                yield return new WaitForSeconds(0.15f);
+
+                SetTransparency(normalAlpha);
+                yield return new WaitForSeconds(0.15f);
+
+                elapsed += 0.3f; // 깜빡이는 시간 추가SetTransparency
+            }
+        }
+
+        SetHeadSprite(HeadSprite.Normal);
+        SetTransparency(normalAlpha);
+        AudioManager.Instance.playOnlyNormal();
+
+        foreach (GameObject part in clawParts)
+        {
+            if (part != null && originalLayers.ContainsKey(part))
+            {
+                part.layer = originalLayers[part]; // 원래 레이어로 되돌리기
+            }
+        }
+    }
+    public IEnumerator GetInvincibleItem()   //invincible 아이템 획득   1. 브금 변경, 2. 캐릭터 layer변경으로 충돌 판정 변화, 3. 캐릭터 표정 변화, 4. fade_Effect
+    {
+        if (stealthCoroutine != null)
+        {
+            StopCoroutine(invincibleCoroutine);
+            invincibleCoroutine = null;
+        }
+
+        // 새로운 코루틴 시작
+        invincibleCoroutine = StartCoroutine(InvincibleRoutine());
+        yield break;
+    }
 
     // 투명도 조절 메서드
     private void SetTransparency(float alpha)
@@ -128,6 +199,7 @@ public class ClawMachineController : MonoBehaviour
             HeadSprite.Normal => Resources.Load<Sprite>("Sprites/Claw/Group 3"),
             HeadSprite.Smile => Resources.Load<Sprite>("Sprites/Claw/Group 13"),
             HeadSprite.Happy => Resources.Load<Sprite>("Sprites/Claw/Group 12"),
+            HeadSprite.Trapped => Resources.Load<Sprite>("Sprites/Claw/Group 8"),
             _ => throw new System.NotImplementedException()
         };
     }
@@ -139,7 +211,6 @@ public class ClawMachineController : MonoBehaviour
         {
             if(part.CompareTag("Claw_Crane"))
             {
-                Debug.Log("찾음");
                 Claw_Crane cc = part.GetComponent<Claw_Crane>();
                 if(cc.originalmaxLength == cc.maxLength)
                 {
@@ -149,4 +220,13 @@ public class ClawMachineController : MonoBehaviour
         }
     }
 
+    public IEnumerator GetTrapped()
+    {
+        SetHeadSprite(HeadSprite.Trapped);
+        GameManager.Instance.StopGame();
+        AudioManager.Instance.StopBgm();
+        yield return new WaitForSecondsRealtime(3);
+        GameManager.Instance.RestartGame();
+        GameManager.Instance.RestartScene(GameManager.currentSceneName);
+    }
 }
