@@ -1,9 +1,7 @@
-using JetBrains.Annotations;
 using SingletonAudioManager;
 using SingletonGameManager;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class ClawMachineController : MonoBehaviour
