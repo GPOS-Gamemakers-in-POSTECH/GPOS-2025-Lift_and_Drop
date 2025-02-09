@@ -17,6 +17,6 @@ public enum SceneNumber
     Stage_03 =3,
     Stage_04 = 4,
     Stage_05 = 5,
-    Stage_06 = 6
+    Stage_07 = 6
 }
 

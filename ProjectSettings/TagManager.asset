@@ -10,11 +10,12 @@ TagManager:
   - Claw_Crane
   - ItemStealth
   - ItemDepth
-  - OnSwitch
   - SwitchTile
   - Trap
   - ItemInvincible
   - Tiles
+  - OnSwitchBall
+  - OnSwitchBox
   layers:
   - Default
   - TransparentFX
@@ -33,12 +34,12 @@ TagManager:
   - Stealth
   - Stealth_Head
   - Tiles2
-  - Switch
+  - Switch_Box
   - Trap
   - Tile3
   - Invincible
   - Invincible_Head
-  - 
+  - Switch_Ball
   - 
   - 
   - 

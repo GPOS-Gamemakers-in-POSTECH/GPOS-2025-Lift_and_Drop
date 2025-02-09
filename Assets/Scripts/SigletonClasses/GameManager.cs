@@ -93,7 +93,8 @@ namespace SingletonGameManager
         }
         public void RestartScene(SceneNumber currentSceneNumber)
         {
-            SceneManager.LoadScene(sceneName);
+            
+            SceneManager.LoadScene(currentSceneName.ToString());
             if (!AudioManager.bgmSource.isPlaying)
             {
                 AudioManager.Instance.playBgm();

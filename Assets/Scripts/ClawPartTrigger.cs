@@ -20,11 +20,6 @@ public class ClawPartTrigger : MonoBehaviour
             controller.PlusMaxDepth();
             Destroy(other.gameObject);
         }
-        else if (other.CompareTag("OnSwitch")) // 태그가 "Item"이면
-        {
-            GameManager.Instance.OnSwitchReached();
-            Destroy(other.gameObject);
-        }
         else if (other.CompareTag("ItemInvincible")) // 태그가 "Item"이면
         {
             StartCoroutine(controller.GetInvincibleItem());
