@@ -25,5 +25,26 @@ public class ClawPartTrigger : MonoBehaviour
             GameManager.Instance.OnSwitchReached();
             Destroy(other.gameObject);
         }
+        else if (other.CompareTag("ItemInvincible")) // 태그가 "Item"이면
+        {
+            StartCoroutine(controller.GetInvincibleItem());
+            Destroy(other.gameObject);
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Trap"))
+        {
+            if (this.gameObject.layer == 20 || this.gameObject.layer == 21)  //무적인 경우
+            {
+                ;
+            }
+            else  //아닌 경우
+            {
+                StartCoroutine(controller.GetTrapped());
+                Destroy(collision.gameObject);
+            }
+        }
     }
 }

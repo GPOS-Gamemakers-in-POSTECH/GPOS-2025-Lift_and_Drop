@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 namespace SingletonGameManager
-{   
+{
     public class GameManager : MonoBehaviour
     {
         private static GameManager instance;
@@ -13,7 +13,7 @@ namespace SingletonGameManager
 
         public static SceneNumber sceneNumber;
         private string sceneName;
-        private static SceneNumber currentSceneName = SceneNumber.Start_scene;
+        public static SceneNumber currentSceneName = SceneNumber.Start_scene;
         private int numberOFScenes = Enum.GetValues(typeof(SceneNumber)).Length;
         bool timeStop = false;
 
@@ -21,11 +21,11 @@ namespace SingletonGameManager
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         private void Awake()
         {
-            if(instance == null)
+            if (instance == null)
             {
                 instance = this;
                 sceneName = SceneManager.GetActiveScene().name;
-                if(System.Enum.TryParse(sceneName, out SceneNumber parsedSceneName))
+                if (System.Enum.TryParse(sceneName, out SceneNumber parsedSceneName))
                 {
                     currentSceneName = parsedSceneName;
                 }
@@ -43,7 +43,7 @@ namespace SingletonGameManager
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
-                if(timeStop)
+                if (timeStop)
                 {
                     Time.timeScale = 1f;
                     timeStop = false;
@@ -85,16 +85,20 @@ namespace SingletonGameManager
         {
             SceneNumber nextSceneNumber = (SceneNumber)((int)currentSceneNumber + 1);
             currentSceneName = nextSceneNumber;
-            if((int)nextSceneNumber != (numberOFScenes))
+            if ((int)nextSceneNumber != (numberOFScenes))
             {
                 Debug.Log(nextSceneNumber.ToString());
                 AudioManager.Instance.playOnlyNormal();
                 SceneManager.LoadScene(nextSceneNumber.ToString());
-            } 
+            }
         }
         public void RestartScene(SceneNumber currentSceneNumber)
         {
             SceneManager.LoadScene(sceneName);
+            if (!AudioManager.bgmSource.isPlaying)
+            {
+                AudioManager.Instance.playBgm();
+            }
         }
         public void OnDollReachedGoal()
         {
@@ -103,8 +107,7 @@ namespace SingletonGameManager
         public void OnSwitchReached()
         {
             GameObject tilemapObj = GameObject.FindWithTag("SwitchTile");
-            Debug.Log("¿©±îÁø ¿È");
-            if (tilemapObj != null) 
+            if (tilemapObj != null)
             {
                 Tilemap tilemap = tilemapObj.GetComponent<Tilemap>();
                 TilemapCollider2D tilemapCollider = tilemapObj.GetComponent<TilemapCollider2D>();

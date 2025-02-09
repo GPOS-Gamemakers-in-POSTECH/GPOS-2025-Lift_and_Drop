@@ -11,17 +11,17 @@ namespace SingletonAudioManager
         public static AudioManager Instance { get { return instance; } }
 
         [Header("#BGM_normal")]
-        public AudioSource bgmSource;
-        float bgmVolume=1;
+        public static AudioSource bgmSource;
+        float bgmVolume = 1;
         public AudioClip bgmClip;
 
         [Header("#BGM_stealth")]
-        public AudioSource bgmSource2;
+        public static AudioSource bgmSource2;
         float bgmVolume2 = 0;
         public AudioClip bgmClip2;
 
         [Header("#BGM_invincible")]
-        public AudioSource bgmSource3;
+        public static AudioSource bgmSource3;
         float bgmVolume3 = 0;
         public AudioClip bgmClip3;
         // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -45,10 +45,10 @@ namespace SingletonAudioManager
         {
 
         }
-        
+
         public void Init()
         {
-            if(bgmSource == null)
+            if (bgmSource == null)
             {
                 GameObject bgmObject = new GameObject("BgmPlayer");
                 bgmSource = bgmObject.AddComponent<AudioSource>();
@@ -57,7 +57,7 @@ namespace SingletonAudioManager
                 bgmSource.loop = true;
                 bgmSource.playOnAwake = false;
             }
-            DontDestroyOnLoad (bgmSource);
+            DontDestroyOnLoad(bgmSource);
 
             if (bgmSource2 == null)
             {
@@ -80,7 +80,7 @@ namespace SingletonAudioManager
                 bgmSource3.playOnAwake = false;
             }
             DontDestroyOnLoad(bgmSource3);
-    }
+        }
         public void playBgm()
         {
             bgmSource.Play();
@@ -105,6 +105,12 @@ namespace SingletonAudioManager
             bgmSource.volume = 0;
             bgmSource2.volume = 0;
             bgmSource3.volume = 1;
+        }
+        public void StopBgm()
+        {
+            bgmSource.Stop();
+            bgmSource2.Stop();
+            bgmSource3.Stop();
         }
     }
 }

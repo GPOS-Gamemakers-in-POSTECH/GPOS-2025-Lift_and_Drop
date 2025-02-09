@@ -4,9 +4,10 @@ public enum HeadSprite
 {
     Normal = 1,
     Smile = 2,
-    Happy = 3
-
+    Happy = 3,
+    Trapped = 4
 }
+
 
 public enum SceneNumber
 {
