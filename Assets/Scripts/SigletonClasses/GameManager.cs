@@ -15,8 +15,8 @@ namespace SingletonGameManager
         private string sceneName;
         private static SceneNumber currentSceneName = SceneNumber.Start_scene;
         private int numberOFScenes = Enum.GetValues(typeof(SceneNumber)).Length;
+        bool timeStop = false;
 
-        
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         private void Awake()
@@ -28,8 +28,8 @@ namespace SingletonGameManager
                 if(System.Enum.TryParse(sceneName, out SceneNumber parsedSceneName))
                 {
                     currentSceneName = parsedSceneName;
-                    Debug.Log("전환 완료");
                 }
+                Screen.SetResolution(1920, 1080, FullScreenMode.FullScreenWindow); //해상도 설정
                 DontDestroyOnLoad(gameObject);
             }
             else
@@ -41,7 +41,28 @@ namespace SingletonGameManager
         // Update is called once per frame
         void Update()
         {
-
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                if(timeStop)
+                {
+                    Time.timeScale = 1f;
+                    timeStop = false;
+                }
+                else
+                {
+                    Time.timeScale = 0f;
+                    timeStop = true;
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                if (timeStop)
+                {
+                    timeStop = false;
+                    Time.timeScale = 1f;
+                    RestartScene(currentSceneName);
+                }
+            }
         }
         public void Clear()
         {
@@ -95,6 +116,14 @@ namespace SingletonGameManager
             {
                 Debug.LogError("SwitchTile 태그를 가진 오브젝트를 찾을 수 없습니다.");
             }
+        }
+        public void StopGame()
+        {
+            Time.timeScale = 0;
+        }
+        public void RestartGame()
+        {
+            Time.timeScale = 1;
         }
     }
 }

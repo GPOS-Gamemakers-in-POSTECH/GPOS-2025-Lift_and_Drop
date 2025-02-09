@@ -17,7 +17,7 @@ public class ClawMachineController : MonoBehaviour
     [SerializeField] private int stealthLayer = 14;
 
     private readonly Dictionary<GameObject, int> originalLayers = new();
-
+    private Coroutine stealthCoroutine;
     void Start()
     {
         if (clawParts.Length == 0)
@@ -35,18 +35,17 @@ public class ClawMachineController : MonoBehaviour
             }
         }
     }
-
-    public IEnumerator GetStealthItem()   //stealth 아이템 획득   1. 브금 변경, 2. 캐릭터 layer변경으로 충돌 판정 변화, 3. 캐릭터 표정 변화, 4. fade_Effect
+    public IEnumerator StealthRoutine()
     {
-        foreach(GameObject part in clawParts)
+        foreach (GameObject part in clawParts)
         {
-            if(part != null)
+            if (part != null)
             {
                 part.layer = stealthLayer; // 투명화 레이어로 변경
                 if (part.name == "Claw_Head")
                 {
                     part.layer = 15;
-                }   
+                }
             }
         }
 
@@ -54,29 +53,29 @@ public class ClawMachineController : MonoBehaviour
         SetHeadSprite(HeadSprite.Smile);
         SetTransparency(defaultStealthAlpha);
         AudioManager.Instance.playOnlyStealth();
-        
+
         yield return new WaitForSeconds(7f);
 
         float elapsed = 0f;
         while (elapsed < 3f)
         {
-            if(elapsed>=2.1f)
+            if (elapsed >= 2.1f)
             {
                 SetTransparency(blinkAlpha);
-                yield return new WaitForSeconds(0.075f); 
+                yield return new WaitForSeconds(0.075f);
 
                 SetTransparency(defaultStealthAlpha);
-                yield return new WaitForSeconds(0.075f); 
+                yield return new WaitForSeconds(0.075f);
 
                 elapsed += 0.15f; // 깜빡이는 시간 추가SetTransparency
             }
             else
             {
                 SetTransparency(blinkAlpha);
-                yield return new WaitForSeconds(0.15f); 
+                yield return new WaitForSeconds(0.15f);
 
                 SetTransparency(defaultStealthAlpha);
-                yield return new WaitForSeconds(0.15f); 
+                yield return new WaitForSeconds(0.15f);
 
                 elapsed += 0.3f; // 깜빡이는 시간 추가SetTransparency
             }
@@ -93,6 +92,18 @@ public class ClawMachineController : MonoBehaviour
                 part.layer = originalLayers[part]; // 원래 레이어로 되돌리기
             }
         }
+    }
+    public IEnumerator GetStealthItem()   //stealth 아이템 획득   1. 브금 변경, 2. 캐릭터 layer변경으로 충돌 판정 변화, 3. 캐릭터 표정 변화, 4. fade_Effect
+    {
+        if (stealthCoroutine != null)
+        {
+            StopCoroutine(stealthCoroutine);
+            stealthCoroutine = null;
+        }
+
+        // 새로운 코루틴 시작
+        stealthCoroutine = StartCoroutine(StealthRoutine());
+        yield break;
     }
 
     // 투명도 조절 메서드
