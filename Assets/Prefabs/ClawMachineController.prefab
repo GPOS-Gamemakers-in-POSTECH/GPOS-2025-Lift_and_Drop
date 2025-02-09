@@ -429,7 +429,7 @@ FixedJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.4300003, y: 1.1800003}
+  m_ConnectedAnchor: {x: 0.42999998, y: 1.1800003}
   m_DampingRatio: 0
   m_Frequency: 0
 --- !u!233 &1542220745333109084
@@ -712,7 +712,7 @@ FixedJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.39999962, y: 1.2000027}
+  m_ConnectedAnchor: {x: -0.39999998, y: 1.2000027}
   m_DampingRatio: 0
   m_Frequency: 0
 --- !u!233 &1751061999421212606
@@ -837,11 +837,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-<<<<<<< HEAD
   m_SortingOrder: -3
-=======
-  m_SortingOrder: 1
->>>>>>> parent of a06c387 (Revert "배경 추가")
   m_Sprite: {fileID: 21300000, guid: eef7e1a263b5c7d4f8584ef36ed3f148, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1025,11 +1021,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-<<<<<<< HEAD
   m_SortingOrder: -3
-=======
-  m_SortingOrder: 1
->>>>>>> parent of a06c387 (Revert "배경 추가")
   m_Sprite: {fileID: 21300000, guid: 3667c73e668d91848b496f5b75453a84, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1217,11 +1209,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-<<<<<<< HEAD
   m_SortingOrder: -2
-=======
-  m_SortingOrder: 1
->>>>>>> parent of a06c387 (Revert "배경 추가")
   m_Sprite: {fileID: 21300000, guid: d9acaa3bd2f41bd42b9a3df367b0f567, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
