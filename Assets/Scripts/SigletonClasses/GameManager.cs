@@ -1,3 +1,4 @@
+using SingletonAudioManager;
 using System;
 using UnityEditor.SearchService;
 using UnityEngine;
@@ -11,7 +12,7 @@ namespace SingletonGameManager
 
         public static SceneNumber sceneNumber;
         private string sceneName;
-        private SceneNumber currentSceneName; 
+        private static SceneNumber currentSceneName = SceneNumber.Start_scene; 
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         private void Awake()
@@ -52,10 +53,12 @@ namespace SingletonGameManager
         public void LoadNextStageScene(SceneNumber currentSceneNumber)
         {
             SceneNumber nextSceneNumber = (SceneNumber)((int)currentSceneNumber + 1);
-            currentSceneNumber = nextSceneNumber;
+            currentSceneName = nextSceneNumber;
             if((int)nextSceneNumber != 4)
             {
-                SceneManager.LoadScene(sceneName);
+                Debug.Log(nextSceneNumber.ToString());
+                AudioManager.Instance.playOnlyNormal();
+                SceneManager.LoadScene(nextSceneNumber.ToString());
             } 
         }
         public void RestartScene(SceneNumber currentSceneNumber)
@@ -64,8 +67,11 @@ namespace SingletonGameManager
         }
         public void OnDollReachedGoal()
         {
-            Debug.Log("메세지 받음");
             Clear();
+        }
+        public void OnSwitchReached()
+        {
+            ;
         }
     }
 }

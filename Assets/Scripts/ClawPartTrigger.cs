@@ -19,13 +19,11 @@ public class ClawPartTrigger : MonoBehaviour
         {
             controller.PlusMaxDepth();
             Destroy(other.gameObject);
-            StartCoroutine(Exid());
         }
-    }
-    public IEnumerator Exid()
-    {
-        SceneNumber sceneNumber = SceneNumber.Stage_01;
-        yield return new WaitForSeconds(3);
-        GameManager.Instance.LoadScene(sceneNumber);
+        else if (other.CompareTag("OnSwitch")) // 태그가 "Item"이면
+        {
+            GameManager.Instance.OnSwitchReached();
+            Destroy(other.gameObject);
+        }
     }
 }
