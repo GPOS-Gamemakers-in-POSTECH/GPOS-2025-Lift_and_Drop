@@ -13,6 +13,9 @@ public enum SceneNumber
     Start_scene = 0,
     Stage_01 =1,
     Stage_02 =2,
-    Stage_03 =3
+    Stage_03 =3,
+    Stage_04 = 4,
+    Stage_05 = 5,
+    Stage_06 = 6
 }
 

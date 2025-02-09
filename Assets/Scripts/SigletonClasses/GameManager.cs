@@ -3,6 +3,7 @@ using System;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
 namespace SingletonGameManager
 {   
     public class GameManager : MonoBehaviour
@@ -12,7 +13,10 @@ namespace SingletonGameManager
 
         public static SceneNumber sceneNumber;
         private string sceneName;
-        private static SceneNumber currentSceneName = SceneNumber.Start_scene; 
+        private static SceneNumber currentSceneName = SceneNumber.Start_scene;
+        private int numberOFScenes = Enum.GetValues(typeof(SceneNumber)).Length;
+
+        
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         private void Awake()
@@ -20,6 +24,12 @@ namespace SingletonGameManager
             if(instance == null)
             {
                 instance = this;
+                sceneName = SceneManager.GetActiveScene().name;
+                if(System.Enum.TryParse(sceneName, out SceneNumber parsedSceneName))
+                {
+                    currentSceneName = parsedSceneName;
+                    Debug.Log("전환 완료");
+                }
                 DontDestroyOnLoad(gameObject);
             }
             else
@@ -54,7 +64,7 @@ namespace SingletonGameManager
         {
             SceneNumber nextSceneNumber = (SceneNumber)((int)currentSceneNumber + 1);
             currentSceneName = nextSceneNumber;
-            if((int)nextSceneNumber != 4)
+            if((int)nextSceneNumber != (numberOFScenes))
             {
                 Debug.Log(nextSceneNumber.ToString());
                 AudioManager.Instance.playOnlyNormal();
@@ -71,7 +81,20 @@ namespace SingletonGameManager
         }
         public void OnSwitchReached()
         {
-            ;
+            GameObject tilemapObj = GameObject.FindWithTag("SwitchTile");
+            Debug.Log("여까진 옴");
+            if (tilemapObj != null) 
+            {
+                Tilemap tilemap = tilemapObj.GetComponent<Tilemap>();
+                TilemapCollider2D tilemapCollider = tilemapObj.GetComponent<TilemapCollider2D>();
+
+                if (tilemap != null) tilemap.gameObject.SetActive(false); // 렌더링 OFF
+                if (tilemapCollider != null) tilemapCollider.enabled = false; // 충돌 OFF
+            }
+            else
+            {
+                Debug.LogError("SwitchTile 태그를 가진 오브젝트를 찾을 수 없습니다.");
+            }
         }
     }
 }

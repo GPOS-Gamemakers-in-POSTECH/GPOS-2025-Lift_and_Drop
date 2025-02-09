@@ -128,8 +128,12 @@ public class ClawMachineController : MonoBehaviour
         {
             if(part.CompareTag("Claw_Crane"))
             {
+                Debug.Log("Ã£À½");
                 Claw_Crane cc = part.GetComponent<Claw_Crane>();
-                cc.maxLength = cc.maxLength + 10f;
+                if(cc.originalmaxLength == cc.maxLength)
+                {
+                    cc.maxLength += 10f;
+                }
             }
         }
     }

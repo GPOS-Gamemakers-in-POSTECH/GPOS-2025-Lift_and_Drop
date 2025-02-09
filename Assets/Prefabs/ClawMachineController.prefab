@@ -1144,7 +1144,7 @@ GameObject:
   - component: {fileID: 2897901486963800623}
   m_Layer: 7
   m_Name: Claw_Crane
-  m_TagString: Untagged
+  m_TagString: Claw_Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
