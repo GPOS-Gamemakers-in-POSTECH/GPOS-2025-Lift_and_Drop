@@ -1,7 +1,9 @@
+using SingletonAudioManager;
 using System;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
 namespace SingletonGameManager
 {   
     public class GameManager : MonoBehaviour
@@ -11,7 +13,10 @@ namespace SingletonGameManager
 
         public static SceneNumber sceneNumber;
         private string sceneName;
-        private SceneNumber currentSceneName; 
+        private static SceneNumber currentSceneName = SceneNumber.Start_scene;
+        private int numberOFScenes = Enum.GetValues(typeof(SceneNumber)).Length;
+        bool timeStop = false;
+
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         private void Awake()
@@ -19,6 +24,12 @@ namespace SingletonGameManager
             if(instance == null)
             {
                 instance = this;
+                sceneName = SceneManager.GetActiveScene().name;
+                if(System.Enum.TryParse(sceneName, out SceneNumber parsedSceneName))
+                {
+                    currentSceneName = parsedSceneName;
+                }
+                Screen.SetResolution(1920, 1080, FullScreenMode.FullScreenWindow); //해상도 설정
                 DontDestroyOnLoad(gameObject);
             }
             else
@@ -30,7 +41,28 @@ namespace SingletonGameManager
         // Update is called once per frame
         void Update()
         {
-
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                if(timeStop)
+                {
+                    Time.timeScale = 1f;
+                    timeStop = false;
+                }
+                else
+                {
+                    Time.timeScale = 0f;
+                    timeStop = true;
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                if (timeStop)
+                {
+                    timeStop = false;
+                    Time.timeScale = 1f;
+                    RestartScene(currentSceneName);
+                }
+            }
         }
         public void Clear()
         {
@@ -52,10 +84,12 @@ namespace SingletonGameManager
         public void LoadNextStageScene(SceneNumber currentSceneNumber)
         {
             SceneNumber nextSceneNumber = (SceneNumber)((int)currentSceneNumber + 1);
-            currentSceneNumber = nextSceneNumber;
-            if((int)nextSceneNumber != 4)
+            currentSceneName = nextSceneNumber;
+            if((int)nextSceneNumber != (numberOFScenes))
             {
-                SceneManager.LoadScene(sceneName);
+                Debug.Log(nextSceneNumber.ToString());
+                AudioManager.Instance.playOnlyNormal();
+                SceneManager.LoadScene(nextSceneNumber.ToString());
             } 
         }
         public void RestartScene(SceneNumber currentSceneNumber)
@@ -64,8 +98,32 @@ namespace SingletonGameManager
         }
         public void OnDollReachedGoal()
         {
-            Debug.Log("메세지 받음");
             Clear();
+        }
+        public void OnSwitchReached()
+        {
+            GameObject tilemapObj = GameObject.FindWithTag("SwitchTile");
+            Debug.Log("여까진 옴");
+            if (tilemapObj != null) 
+            {
+                Tilemap tilemap = tilemapObj.GetComponent<Tilemap>();
+                TilemapCollider2D tilemapCollider = tilemapObj.GetComponent<TilemapCollider2D>();
+
+                if (tilemap != null) tilemap.gameObject.SetActive(false); // 렌더링 OFF
+                if (tilemapCollider != null) tilemapCollider.enabled = false; // 충돌 OFF
+            }
+            else
+            {
+                Debug.LogError("SwitchTile 태그를 가진 오브젝트를 찾을 수 없습니다.");
+            }
+        }
+        public void StopGame()
+        {
+            Time.timeScale = 0;
+        }
+        public void RestartGame()
+        {
+            Time.timeScale = 1;
         }
     }
 }

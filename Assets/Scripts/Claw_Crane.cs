@@ -4,6 +4,7 @@ using UnityEngine.UIElements;
 public class Claw_Crane : MonoBehaviour
 {
     public float maxLength = 5f;
+    public float originalmaxLength;
     [SerializeField] private float speed = 3f;
 
     private float firstPositionY;
@@ -16,7 +17,7 @@ public class Claw_Crane : MonoBehaviour
     void Awake()
     {
         _rigidbdoy = GetComponent<Rigidbody2D>();
-
+        originalmaxLength = maxLength;
         firstPositionY = _rigidbdoy.position.y;
     }
 
