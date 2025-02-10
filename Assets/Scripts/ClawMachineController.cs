@@ -16,8 +16,7 @@ public class ClawMachineController : MonoBehaviour
     [SerializeField] private int stealthLayer = 14;
     [SerializeField] private int invincibleLayer = 20;
     private readonly Dictionary<GameObject, int> originalLayers = new();
-    private Coroutine stealthCoroutine;
-    private Coroutine invincibleCoroutine;
+    private Coroutine currentCoroutine;
     void Start()
     {
         if (clawParts.Length == 0)
@@ -92,17 +91,19 @@ public class ClawMachineController : MonoBehaviour
                 part.layer = originalLayers[part]; // 원래 레이어로 되돌리기
             }
         }
+        currentCoroutine = null;
     }
     public IEnumerator GetStealthItem()   //stealth 아이템 획득   1. 브금 변경, 2. 캐릭터 layer변경으로 충돌 판정 변화, 3. 캐릭터 표정 변화, 4. fade_Effect
     {
-        if (stealthCoroutine != null)
+        if (currentCoroutine != null)
         {
-            StopCoroutine(stealthCoroutine);
-            stealthCoroutine = null;
+            StopCoroutine(currentCoroutine);
+            SetNormalState();
+            currentCoroutine = null;
         }
 
         // 새로운 코루틴 시작
-        stealthCoroutine = StartCoroutine(StealthRoutine());
+        currentCoroutine = StartCoroutine(StealthRoutine());
         yield break;
     }
     public IEnumerator InvincibleRoutine()
@@ -161,17 +162,19 @@ public class ClawMachineController : MonoBehaviour
                 part.layer = originalLayers[part]; // 원래 레이어로 되돌리기
             }
         }
+        currentCoroutine = null;
     }
     public IEnumerator GetInvincibleItem()   //invincible 아이템 획득   1. 브금 변경, 2. 캐릭터 layer변경으로 충돌 판정 변화, 3. 캐릭터 표정 변화, 4. fade_Effect
     {
-        if (stealthCoroutine != null)
+        if (currentCoroutine != null)
         {
-            StopCoroutine(invincibleCoroutine);
-            invincibleCoroutine = null;
+            StopCoroutine(currentCoroutine);
+            SetNormalState();
+            currentCoroutine = null;
         }
 
         // 새로운 코루틴 시작
-        invincibleCoroutine = StartCoroutine(InvincibleRoutine());
+        currentCoroutine = StartCoroutine(InvincibleRoutine());
         yield break;
     }
 
@@ -201,7 +204,11 @@ public class ClawMachineController : MonoBehaviour
             _ => throw new System.NotImplementedException()
         };
     }
-
+    private void SetNormalState()
+    {
+        SetHeadSprite(HeadSprite.Normal);
+        SetTransparency(1.0f);
+    }
 
     public void PlusMaxDepth()
     {
