@@ -16,6 +16,7 @@ TagManager:
   - Tiles
   - OnSwitchBall
   - OnSwitchBox
+  - Quit
   layers:
   - Default
   - TransparentFX
@@ -40,7 +41,7 @@ TagManager:
   - Invincible
   - Invincible_Head
   - Switch_Ball
-  - 
+  - Quit
   - 
   - 
   - 

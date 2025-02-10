@@ -41,7 +41,11 @@ public class Doll : MonoBehaviour
         if (collision.gameObject.CompareTag("Goal"))
         {
             StartCoroutine(DollReachedGoal());
-        }   
+        }
+        else if (collision.gameObject.CompareTag("Quit"))
+        {
+            StartCoroutine(EndGame());
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -60,5 +64,10 @@ public class Doll : MonoBehaviour
         yield return new WaitForSeconds(3);
         GameManager.Instance.OnDollReachedGoal();
         Destroy(this.gameObject);
+    }
+    private IEnumerator EndGame()
+    {
+        yield return new WaitForSeconds(2f);
+        GameManager.Instance.QuitGame();
     }
 }

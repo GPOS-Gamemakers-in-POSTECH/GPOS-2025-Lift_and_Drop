@@ -62,6 +62,11 @@ namespace SingletonGameManager
                     RestartScene(currentSceneName);
                 }
             }
+
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                QuitGame();
+            }
         }
         public void Clear()
         {
@@ -127,6 +132,10 @@ namespace SingletonGameManager
         public void RestartGame()
         {
             Time.timeScale = 1;
+        }
+        public void QuitGame()
+        {
+            Application.Quit(); // 빌드된 게임 종료
         }
     }
 }
