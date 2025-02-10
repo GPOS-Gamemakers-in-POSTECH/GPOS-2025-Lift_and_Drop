@@ -28,7 +28,7 @@ namespace SingletonGameManager
                 {
                     currentSceneName = parsedSceneName;
                 }
-                Screen.SetResolution(1920, 1080, FullScreenMode.FullScreenWindow); //해상도 설정
+                Screen.SetResolution(2048, 1152, FullScreenMode.Windowed); //해상도 설정
                 DontDestroyOnLoad(gameObject);
             }
             else
@@ -40,7 +40,7 @@ namespace SingletonGameManager
         // Update is called once per frame
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.R))
+            if (Input.GetKeyDown(KeyCode.T))
             {
                 if (timeStop)
                 {
@@ -53,7 +53,7 @@ namespace SingletonGameManager
                     timeStop = true;
                 }
             }
-            if (Input.GetKeyDown(KeyCode.T))
+            if (Input.GetKeyDown(KeyCode.R))
             {
                 if (timeStop)
                 {
