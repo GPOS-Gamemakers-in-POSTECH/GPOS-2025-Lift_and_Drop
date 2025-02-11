@@ -24,6 +24,19 @@ namespace SingletonAudioManager
         public static AudioSource bgmSource3;
         float bgmVolume3 = 0;
         public AudioClip bgmClip3;
+
+        [Header("#SFX")]
+        public static AudioSource[] sfxSources; 
+        public AudioClip[] sfxClips;
+        public float sfxVolume;
+        public int channels;
+        int channelIndex;
+
+        public static bool isMoving = false;
+        public static bool isMotorStartPlayed = false;
+        public static Coroutine exitCoroutine;
+        public static bool isMovingKeyPressed;
+
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         private void Awake()
         {
@@ -43,7 +56,7 @@ namespace SingletonAudioManager
         // Update is called once per frame
         void Update()
         {
-
+            
         }
 
         public void Init()
@@ -80,6 +93,20 @@ namespace SingletonAudioManager
                 bgmSource3.playOnAwake = false;
             }
             DontDestroyOnLoad(bgmSource3);
+
+            if(sfxSources == null)
+            {
+                GameObject sfxObject = new GameObject("SfxPlayer");
+                sfxObject.transform.parent= transform;
+                sfxSources = new AudioSource[channels];
+
+                for(int index = 0; index < sfxSources.Length; index++)
+                {
+                    sfxSources[index] = sfxObject.AddComponent<AudioSource>();
+                    sfxSources[index].playOnAwake= false;
+                    sfxSources[index].volume = sfxVolume;
+                }
+            }
         }
         public void playBgm()
         {
@@ -111,6 +138,66 @@ namespace SingletonAudioManager
             bgmSource.Stop();
             bgmSource2.Stop();
             bgmSource3.Stop();
+        }
+
+        public void playSfx(Sfx sfx)
+        {
+            for(int index=0; index<sfxSources.Length; index++)
+            {
+                int loopIndex = (index + channelIndex) % sfxSources.Length;
+
+                if (sfxSources[loopIndex].isPlaying)
+                {
+                    continue;
+                }
+                channelIndex = loopIndex;
+                sfxSources[loopIndex].clip = sfxClips[(int)sfx];
+                sfxSources[loopIndex].Play();
+                break;
+            }
+        }
+        public void StartMotorSound()
+        {
+            isMoving = true;
+
+            if(!isMotorStartPlayed)
+            {
+                isMotorStartPlayed = true;
+                sfxSources[0].clip = sfxClips[(int)Sfx.motor_intro];
+                sfxSources[0].Play();
+                Invoke(nameof(PlayMotorLoop), sfxClips[0].length);
+            }
+            else
+            {
+                PlayMotorLoop();
+            }
+        }
+        private void PlayMotorLoop()
+        {
+            if(isMoving)
+            {
+                sfxSources[1].clip = sfxClips[(int)Sfx.motor_loop];
+                sfxSources[1].loop = true;
+                sfxSources[1].Play();
+            }
+        }
+        public IEnumerator WaitAndPlayExitSound()
+        {
+            yield return new WaitForSeconds(0.05f);
+            if(!isMovingKeyPressed)
+            {
+                StopMotorSound();
+            }
+            exitCoroutine = null;
+        }
+        private void StopMotorSound()
+        {
+            isMoving = false;
+            sfxSources[1].loop = false;
+            sfxSources[1].Stop();
+            sfxSources[0].clip = sfxClips[(int)Sfx.motor_exit];
+            sfxSources[0].Play();
+            isMotorStartPlayed = false;
         }
     }
 }

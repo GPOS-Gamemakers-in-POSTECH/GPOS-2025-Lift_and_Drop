@@ -622,6 +622,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 907309102912268472, guid: 1a7b39b7a6aeec849833fe2248769f00, type: 3}
+      propertyPath: channels
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 907309102912268472, guid: 1a7b39b7a6aeec849833fe2248769f00, type: 3}
+      propertyPath: sfxVolume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 907309102912268472, guid: 1a7b39b7a6aeec849833fe2248769f00, type: 3}
+      propertyPath: sfxClips.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 907309102912268472, guid: 1a7b39b7a6aeec849833fe2248769f00, type: 3}
+      propertyPath: 'sfxClips.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: d2d91e21d06ba6341ae537a6ae9d8238, type: 3}
+    - target: {fileID: 907309102912268472, guid: 1a7b39b7a6aeec849833fe2248769f00, type: 3}
+      propertyPath: 'sfxClips.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 756ddd9e078848d4589fb2dfaf99e421, type: 3}
+    - target: {fileID: 907309102912268472, guid: 1a7b39b7a6aeec849833fe2248769f00, type: 3}
+      propertyPath: 'sfxClips.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: ae9606639e61d7242b2990149b39925e, type: 3}
     - target: {fileID: 5383633820858304739, guid: 1a7b39b7a6aeec849833fe2248769f00, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.9737415
@@ -665,6 +689,10 @@ PrefabInstance:
     - target: {fileID: 7019732487586153998, guid: 1a7b39b7a6aeec849833fe2248769f00, type: 3}
       propertyPath: m_Name
       value: AudioManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7019732487586153998, guid: 1a7b39b7a6aeec849833fe2248769f00, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -773,6 +801,10 @@ PrefabInstance:
     - target: {fileID: 1751061999421212606, guid: 9af890ccd6b81c043be94c0d5e51748b, type: 3}
       propertyPath: m_ConnectedAnchor.y
       value: -0.29999927
+      objectReference: {fileID: 0}
+    - target: {fileID: 1802946409590086004, guid: 9af890ccd6b81c043be94c0d5e51748b, type: 3}
+      propertyPath: maxLength
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1920152637619722593, guid: 9af890ccd6b81c043be94c0d5e51748b, type: 3}
       propertyPath: m_LocalScale.x

@@ -20,3 +20,9 @@ public enum SceneNumber
     Stage_07 = 6
 }
 
+public enum Sfx
+{
+    motor_intro = 0,
+    motor_loop = 1,
+    motor_exit = 2
+}

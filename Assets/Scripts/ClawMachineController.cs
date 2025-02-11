@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ClawMachineController : MonoBehaviour
 {
-    [SerializeField] private GameObject[] clawParts; // Claw_Head, Claw_Crane µî ¸ðµç ºÎÇ°À» ¿©±â¿¡ ÇÒ´ç
+    [SerializeField] private GameObject[] clawParts; // Claw_Head, Claw_Crane ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Ç°ï¿½ï¿½ ï¿½ï¿½ï¿½â¿¡ ï¿½Ò´ï¿½
     [SerializeField] private SpriteRenderer _headSpriteRenderer;
 
     [SerializeField] private float blinkAlpha = 0.2f;
@@ -17,6 +17,9 @@ public class ClawMachineController : MonoBehaviour
     [SerializeField] private int invincibleLayer = 20;
     private readonly Dictionary<GameObject, int> originalLayers = new();
     private Coroutine currentCoroutine;
+
+    private Rigidbody2D _clawHeartRb;
+    bool hasMoved;
     void Start()
     {
         if (clawParts.Length == 0)
@@ -25,12 +28,52 @@ public class ClawMachineController : MonoBehaviour
         }
         foreach (GameObject part in clawParts)
         {
-            ClawPartTrigger trigger = part.AddComponent<ClawPartTrigger>(); // µ¿ÀûÀ¸·Î Trigger ½ºÅ©¸³Æ® Ãß°¡
-            trigger.controller = this; // ClawMachineController ¿¬°á
+            ClawPartTrigger trigger = part.AddComponent<ClawPartTrigger>(); 
+            trigger.controller = this; // ClawMachineController
             originalLayers[part] = part.layer;
             if (part.name == "Claw_Head")
             {
                 _headSpriteRenderer = part.GetComponent<SpriteRenderer>();
+            }
+        }
+
+        GameObject clawHeart = GameObject.Find("Claw_Heart");
+        if (clawHeart != null)
+        {
+            _clawHeartRb = clawHeart.GetComponent<Rigidbody2D>();
+        }
+        else
+        {
+            Debug.LogError("Claw_Heart Not in this Scene");
+        }
+    }
+    private void Update()
+    {
+        if (_clawHeartRb == null)
+        {
+            return; //
+        }
+
+        AudioManager.isMovingKeyPressed = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
+        hasMoved = _clawHeartRb.linearVelocity.magnitude > 0.1f;
+        if (AudioManager.isMovingKeyPressed && hasMoved)
+        {
+            AudioManager.sfxSources[1].volume = 0.5f;
+            if (!AudioManager.isMoving)
+            {
+                AudioManager.Instance.StartMotorSound();
+            }
+            if (AudioManager.exitCoroutine != null)
+            {
+                StopCoroutine(AudioManager.exitCoroutine);
+                AudioManager.exitCoroutine = null;
+            }
+        }
+        else if (AudioManager.isMoving)
+        {
+            if (AudioManager.exitCoroutine == null)
+            {
+                AudioManager.exitCoroutine = StartCoroutine(AudioManager.Instance.WaitAndPlayExitSound());
             }
         }
     }
@@ -40,7 +83,7 @@ public class ClawMachineController : MonoBehaviour
         {
             if (part != null)
             {
-                part.layer = stealthLayer; // Åõ¸íÈ­ ·¹ÀÌ¾î·Î º¯°æ
+                part.layer = stealthLayer; // ï¿½ï¿½ï¿½ï¿½È­ ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 if (part.name == "Claw_Head")
                 {
                     part.layer = 15;
@@ -66,7 +109,7 @@ public class ClawMachineController : MonoBehaviour
                 SetTransparency(defaultStealthAlpha);
                 yield return new WaitForSeconds(0.075f);
 
-                elapsed += 0.15f; // ±ôºýÀÌ´Â ½Ã°£ Ãß°¡SetTransparency
+                elapsed += 0.15f; // ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½Ã°ï¿½ ï¿½ß°ï¿½SetTransparency
             }
             else
             {
@@ -76,7 +119,7 @@ public class ClawMachineController : MonoBehaviour
                 SetTransparency(defaultStealthAlpha);
                 yield return new WaitForSeconds(0.15f);
 
-                elapsed += 0.3f; // ±ôºýÀÌ´Â ½Ã°£ Ãß°¡SetTransparency
+                elapsed += 0.3f; // ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½Ã°ï¿½ ï¿½ß°ï¿½SetTransparency
             }
         }
 
@@ -88,12 +131,12 @@ public class ClawMachineController : MonoBehaviour
         {
             if (part != null && originalLayers.ContainsKey(part))
             {
-                part.layer = originalLayers[part]; // ¿ø·¡ ·¹ÀÌ¾î·Î µÇµ¹¸®±â
+                part.layer = originalLayers[part]; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½Çµï¿½ï¿½ï¿½ï¿½ï¿½
             }
         }
         currentCoroutine = null;
     }
-    public IEnumerator GetStealthItem()   //stealth ¾ÆÀÌÅÛ È¹µæ   1. ºê±Ý º¯°æ, 2. Ä³¸¯ÅÍ layerº¯°æÀ¸·Î Ãæµ¹ ÆÇÁ¤ º¯È­, 3. Ä³¸¯ÅÍ Ç¥Á¤ º¯È­, 4. fade_Effect
+    public IEnumerator GetStealthItem()   
     {
         if (currentCoroutine != null)
         {
@@ -102,7 +145,7 @@ public class ClawMachineController : MonoBehaviour
             currentCoroutine = null;
         }
 
-        // »õ·Î¿î ÄÚ·çÆ¾ ½ÃÀÛ
+        // ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½Ú·ï¿½Æ¾ ï¿½ï¿½ï¿½ï¿½
         currentCoroutine = StartCoroutine(StealthRoutine());
         yield break;
     }
@@ -112,7 +155,7 @@ public class ClawMachineController : MonoBehaviour
         {
             if (part != null)
             {
-                part.layer = invincibleLayer; // Åõ¸íÈ­ ·¹ÀÌ¾î·Î º¯°æ
+                part.layer = invincibleLayer; // ï¿½ï¿½ï¿½ï¿½È­ ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 if (part.name == "Claw_Head")
                 {
                     part.layer = 21;
@@ -137,7 +180,7 @@ public class ClawMachineController : MonoBehaviour
                 SetTransparency(normalAlpha);
                 yield return new WaitForSeconds(0.075f);
 
-                elapsed += 0.15f; // ±ôºýÀÌ´Â ½Ã°£ Ãß°¡SetTransparency
+                elapsed += 0.15f; // ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½Ã°ï¿½ ï¿½ß°ï¿½SetTransparency
             }
             else
             {
@@ -147,7 +190,7 @@ public class ClawMachineController : MonoBehaviour
                 SetTransparency(normalAlpha);
                 yield return new WaitForSeconds(0.15f);
 
-                elapsed += 0.3f; // ±ôºýÀÌ´Â ½Ã°£ Ãß°¡SetTransparency
+                elapsed += 0.3f; // ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½Ã°ï¿½ ï¿½ß°ï¿½SetTransparency
             }
         }
 
@@ -159,12 +202,12 @@ public class ClawMachineController : MonoBehaviour
         {
             if (part != null && originalLayers.ContainsKey(part))
             {
-                part.layer = originalLayers[part]; // ¿ø·¡ ·¹ÀÌ¾î·Î µÇµ¹¸®±â
+                part.layer = originalLayers[part]; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½Çµï¿½ï¿½ï¿½ï¿½ï¿½
             }
         }
         currentCoroutine = null;
     }
-    public IEnumerator GetInvincibleItem()   //invincible ¾ÆÀÌÅÛ È¹µæ   1. ºê±Ý º¯°æ, 2. Ä³¸¯ÅÍ layerº¯°æÀ¸·Î Ãæµ¹ ÆÇÁ¤ º¯È­, 3. Ä³¸¯ÅÍ Ç¥Á¤ º¯È­, 4. fade_Effect
+    public IEnumerator GetInvincibleItem()   
     {
         if (currentCoroutine != null)
         {
@@ -173,12 +216,12 @@ public class ClawMachineController : MonoBehaviour
             currentCoroutine = null;
         }
 
-        // »õ·Î¿î ÄÚ·çÆ¾ ½ÃÀÛ
+        // ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½Ú·ï¿½Æ¾ ï¿½ï¿½ï¿½ï¿½
         currentCoroutine = StartCoroutine(InvincibleRoutine());
         yield break;
     }
 
-    // Åõ¸íµµ Á¶Àý ¸Þ¼­µå
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
     private void SetTransparency(float alpha)
     {
         foreach (GameObject part in clawParts)
@@ -187,7 +230,7 @@ public class ClawMachineController : MonoBehaviour
             if (sr != null)
             {
                 Color color = sr.color;
-                color.a = Mathf.Clamp(alpha, 0f, 1f); // 0 = ¿ÏÀü Åõ¸í, 1 = ºÒÅõ¸í
+                color.a = Mathf.Clamp(alpha, 0f, 1f); // 0 = ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, 1 = ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 sr.color = color;
             }
         }
