@@ -199,5 +199,11 @@ namespace SingletonAudioManager
             sfxSources[0].Play();
             isMotorStartPlayed = false;
         }
+        public void StartClearSound()
+        {
+            sfxSources[2].clip = sfxClips[(int)Sfx.bonus];
+            sfxSources[2].loop = false;
+            sfxSources[2].Play();
+        }
     }
 }

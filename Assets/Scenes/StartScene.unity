@@ -632,7 +632,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 907309102912268472, guid: 1a7b39b7a6aeec849833fe2248769f00, type: 3}
       propertyPath: sfxClips.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 907309102912268472, guid: 1a7b39b7a6aeec849833fe2248769f00, type: 3}
       propertyPath: 'sfxClips.Array.data[0]'
@@ -646,6 +646,10 @@ PrefabInstance:
       propertyPath: 'sfxClips.Array.data[2]'
       value: 
       objectReference: {fileID: 8300000, guid: ae9606639e61d7242b2990149b39925e, type: 3}
+    - target: {fileID: 907309102912268472, guid: 1a7b39b7a6aeec849833fe2248769f00, type: 3}
+      propertyPath: 'sfxClips.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 5ab8fc664ca4d604f820e255005a664a, type: 3}
     - target: {fileID: 5383633820858304739, guid: 1a7b39b7a6aeec849833fe2248769f00, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.9737415

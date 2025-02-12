@@ -1,6 +1,7 @@
 using UnityEngine;
 using SingletonGameManager;
 using System.Collections;
+using SingletonAudioManager;
 public class Doll : MonoBehaviour
 {
     private Rigidbody2D _rigidbody;
@@ -40,6 +41,7 @@ public class Doll : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Goal"))
         {
+            AudioManager.Instance.StartClearSound();
             StartCoroutine(DollReachedGoal());
         }
         else if (collision.gameObject.CompareTag("Quit"))

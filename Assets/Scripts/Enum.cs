@@ -24,5 +24,6 @@ public enum Sfx
 {
     motor_intro = 0,
     motor_loop = 1,
-    motor_exit = 2
+    motor_exit = 2,
+    bonus =3
 }
