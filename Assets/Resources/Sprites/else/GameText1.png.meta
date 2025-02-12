@@ -103,13 +103,13 @@ TextureImporter:
       name: GameText1_0
       rect:
         serializedVersion: 2
-        x: 12
+        x: 1
         y: 8
-        width: 629
+        width: 316
         height: 123
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      alignment: 9
+      pivot: {x: 0.49352977, y: 0.47643802}
+      border: {x: 305, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 035ca26d9e585994dbbb2d98adc56419
     internalID: 0
     vertices: []
     indices: 

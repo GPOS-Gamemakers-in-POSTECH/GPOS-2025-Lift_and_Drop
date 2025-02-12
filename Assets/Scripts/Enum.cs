@@ -17,7 +17,8 @@ public enum SceneNumber
     Stage_03 =3,
     Stage_04 = 4,
     Stage_05 = 5,
-    Stage_07 = 6
+    Stage_07 = 6,
+    Clear_scene=7
 }
 
 public enum Sfx
