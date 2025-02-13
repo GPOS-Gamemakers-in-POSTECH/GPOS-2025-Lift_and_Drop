@@ -56,6 +56,7 @@ public class Trap_Spinner : MonoBehaviour
     }
     private IEnumerator Crushed(Collision2D collision)
     {
+        IsMoving = true;
         moveDirection = (transform.position - collision.transform.position).normalized;
         movingSpeedTS = 40f;
         OppositeDir = 1;
