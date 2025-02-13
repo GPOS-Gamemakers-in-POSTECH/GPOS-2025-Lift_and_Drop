@@ -18,7 +18,7 @@ public enum SceneNumber
     Stage_04 = 4,
     Stage_05 = 5,
     Stage_07 = 6,
-    Clear_scene=7
+    Clear_scene = 7
 }
 
 public enum Sfx
@@ -26,5 +26,5 @@ public enum Sfx
     motor_intro = 0,
     motor_loop = 1,
     motor_exit = 2,
-    bonus =3
+    bonus = 3
 }

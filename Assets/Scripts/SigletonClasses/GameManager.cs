@@ -55,12 +55,7 @@ namespace SingletonGameManager
             }
             if (Input.GetKeyDown(KeyCode.R))
             {
-                if (timeStop)
-                {
-                    timeStop = false;
-                    Time.timeScale = 1f;
-                    RestartScene(currentSceneName);
-                }
+                RestartScene(currentSceneName);
             }
 
             if(Input.GetKeyDown(KeyCode.Escape))
